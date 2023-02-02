@@ -1,38 +1,55 @@
 <script>
-    import CardLocations from "../components/CardLocations.svelte";
 </script>
 
 <body>
-    <div class="auth">
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-    </div>
-
-    <div class="card-emplacement">
-        <CardLocations></CardLocations>
-    </div>
-
+    <h1 class="up">Front End Exercise with SvelteKit</h1>
+    <nav class="menu">
+        <a href="/locations">Play with locations</a>
+    </nav>
+    <h1 class="down">Web Application Course at ESILV</h1>
 </body>
 
 <style>
     body{
         background: #2F4952;
-    }
-
-    .auth{
+        vertical-align: center;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
-        text-align: center;
-        font-size: 20px;
     }
 
-    a{
+    h1{
+        line-height: 40px;
+        margin: auto;
+        font-size: 20px;
+        color: #999999;
+    }
+    .up{
+        margin-top: 20vh;
+    }
+
+    nav{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        font-size: 40px;
+        font-weight: bold;
+        background: black;
+        width: auto;
+        margin: 5vh auto;
+        border-radius: 10px;
+    }
+
+    nav a{
+        line-height: 20vh;
+        padding: 0 5vh;
         text-decoration: none;
-        margin: 10px;
         color: #FFFFFF;
     }
 
-    a:hover{
+    nav a:hover{
         color: #999999;
     }
+
+
 </style>

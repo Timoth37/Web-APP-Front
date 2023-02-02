@@ -1,83 +1,38 @@
+<script>
+    import {redirect} from "@sveltejs/kit";
+    let username = '';
+    let password = '';
+
+    async function handleSubmit() {
+        const response = await fetch('http://localhost:3000/users/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+        });
+        const data = await response;
+        if (data.error) {
+            throw redirect(303,'/register')
+        } else {
+            window.location.href = '/login';
+        }
+    }
+</script>
+
 <head>
     <meta charset="UTF-8">
     <title>Register Page</title>
+    <link href="/registerstyle.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
     <div class="form">
         <div class="header">
             <h2>Register</h2>
         </div>
-        <form class="login-form" action="register" method="POST">
-            <input type="text" name="username" placeholder="username"/>
-            <input type="password" name="password" placeholder="password"/>
+        <form class="login-form" on:submit|preventDefault={handleSubmit}>
+            <input type="text" name="username" placeholder="username" bind:value={username}/>
+            <input type="password" name="password" placeholder="password" bind:value={password}/>
             <button type="submit">Register</button>
         </form>
         <p class="message">Already Registered ? <a href="login">Login</a></p>
     </div>
 </body>
-
-<style>
-    body{
-        background: #2F4952;
-    }
-
-    .header{
-        text-align: center;
-        align-items: center;
-        font-family: "Roboto", sans-serif;
-        text-transform: uppercase;
-        color: #000000;
-        font-weight: bolder;
-        font-size: 40px;
-    }
-
-    .form {
-        margin: 0 auto 0 auto;
-        border-radius: 5px;
-        padding: 1px 45px 45px 45px;
-        background: #EAEBEC;
-        max-width: 360px;
-        text-align: center;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3), 0 5px 5px 0 rgba(0, 0, 0, 0.3);
-    }
-    .form input {
-        font-family: "Roboto", sans-serif;
-        background: #f2f2f2;
-        width: 100%;
-        border: 0;
-        margin: 0 0 15px;
-        padding: 15px;
-        box-sizing: border-box;
-        font-size: 14px;
-    }
-
-
-    .form button {
-        font-family: "Roboto", sans-serif;
-        text-transform: uppercase;
-        background: #444444;
-        width: 100%;
-        border: 0;
-        padding: 15px;
-        color: #FFFFFF;
-        font-size: 14px;
-        cursor: pointer;
-    }
-    .form button:hover,.form button:active,.form button:focus {
-        background: #111111;
-    }
-    .form .message {
-        margin: 15px 0 0;
-        color: #b3b3b3;
-        font-size: 15px;
-    }
-    .form .message a {
-        color: #444444;
-        text-decoration: none;
-    }
-
-    .form .message a:hover {
-        color: #111111;
-    }
-
-</style>

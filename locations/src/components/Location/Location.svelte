@@ -1,13 +1,41 @@
 <script>
+    let active;
     export let location;
-    let active = false;
-
+    export let onDelete;
+    let userRole ='admin';
+    let buttonDisabled=false;
     function onDeploy() {
         active = !active;
     }
+    const deleteLocation = async (id) =>{
+        await fetch(`http://localhost:3000/locations/${id}`, {
+            headers: {'Authorization': `Bearer ${sessionStorage.getItem('token')}`},
+            method: 'DELETE'
+        })
+        onDelete(location._id)
+    }
+    const modifyLocation = async(id) =>{
+        await fetch(`http://localhost:3000/locations/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionStorage.getItem('token')}`},
+            body: JSON.stringify(location)
+        });
+    }
 
-    function onDelete(){
-
+    function handleDisabled(){
+        buttonDisabled = !(
+            location.filmName
+            && location.filmType
+            && location.filmDirectorName
+            && location.filmProducerName
+            && location.year
+            && location.startDate
+            && location.endDate
+            && location.address
+            && location.geolocation.coordinates[0]
+            && location.geolocation.coordinates[1]
+            && location.district
+            && location.sourceLocationId)
     }
 </script>
 
@@ -18,30 +46,48 @@
     {#if active}
     <div class="film-infos">
         <div class="field">
-            <p class="title">Title : </p>
-            <p class="value">{location.filmName}</p>
+            <p class="title">District : </p>
+            <input name="district" bind:value={location.district} on:input={handleDisabled}>
+        </div>
+        <div class="field">
+            <p class="title">Source Location ID : </p>
+            <input name="sourceLocationId" bind:value={location.sourceLocationId} on:input={handleDisabled}>
+        </div>
+        <div class="field">
+            <p class="title">Film Name : </p>
+            <input name="filmName" bind:value={location.filmName} on:input={handleDisabled}>
         </div>
         <div class="field">
             <p class="title">Film Type: </p>
-            <p class="value">{location.filmType}</p>
+            <input name="filmType" bind:value={location.filmType} on:input={handleDisabled}>
         </div>
         <div class="field">
             <p class="title">Film Producer: </p>
-            <p class="value">{location.filmProducerName}</p>
+            <input name="filmProducerName" bind:value={location.filmProducerName} on:input={handleDisabled}>
         </div>
         <div class="field">
             <p class="title">Film Director: </p>
-            <p class="value">{location.filmDirectorName}</p>
+            <input name="filmDirectorName" bind:value={location.filmDirectorName} on:input={handleDisabled}>
+        </div>
+        <div class="field">
+            <p class="title">Start Date: </p>
+            <input name="startDate" bind:value={location.startDate} on:input={handleDisabled}>
+        </div>
+        <div class="field">
+            <p class="title">End Date: </p>
+            <input name="endDate" bind:value={location.endDate} on:input={handleDisabled}>
         </div>
         <div class="field">
             <p class="title">Year: </p>
-            <p class="value">{location.year}</p>
+            <input name="year" bind:value={location.year} on:input={handleDisabled}>
         </div>
     </div>
-    <div class="buttons">
-        <button class="delete" on:click={onDelete}>Delete</button>
-        <button class="modify">Modify</button>
-    </div>
+        {#if userRole==='admin'}
+            <div class="buttons">
+                <button class="delete" on:click={deleteLocation(location._id)}>Delete</button>
+                <button class="modify" on:click={modifyLocation(location._id)} disabled="{buttonDisabled}">Modify</button>
+            </div>
+        {/if}
     {/if}
 </div>
 
@@ -97,6 +143,16 @@
         width: 100px;
     }
 
+    .field input{
+        width: 90%;
+        border: none;
+        background: #f2f2f2;
+    }
+
+    .field input:hover{
+        background: #EAEBEC;
+    }
+
     .buttons{
         display: flex;
         flex-direction: row;
@@ -125,5 +181,10 @@
     }
     .buttons .modify:hover{
         background: #000000;
+    }
+
+    .buttons .modify:disabled{
+        background: #CCCCCC;
+        cursor: auto;
     }
 </style>
