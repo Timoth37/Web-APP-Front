@@ -1,8 +1,7 @@
 <script>
     import MdLocationOn from 'svelte-icons/md/MdLocationOn.svelte'
     import {enhance} from "$app/forms";
-    export let onAdd;
-    let buttonDisabled =false;
+    let buttonDisabled =true;
 
     let location = {
         filmName : "",
@@ -44,7 +43,11 @@
             <div class="icon">
                 <MdLocationOn />
             </div>
-            <input name="address" placeholder="ex: 1 rue de la Paix" required>
+            <input name="address"
+                   placeholder="ex: 1 rue de la Paix"
+                   required
+                   bind:value={location.address}
+                   on:input={handleDisabled}>
         </div>
         <div class="film-infos">
             <div class="name-infos">
@@ -101,7 +104,7 @@
                 <div class="right-infos">
                     <div class="field">
                         <p class="title">Film Producer: </p>
-                        <input name="filmProducer"
+                        <input name="filmProducerName"
                                placeholder="ex: Jean Dupond"
                                bind:value={location.filmProducerName}
                                on:input={handleDisabled}>
@@ -139,7 +142,7 @@
             </div>
         </div>
         <div class="buttons">
-            <button class="add" on:click={onAdd(location)} disabled="{buttonDisabled}">Add</button>
+            <button class="add" disabled="{buttonDisabled}">Add</button>
         </div>
     </form>
 </div>

@@ -2,7 +2,6 @@
     import {enhance} from "$app/forms";
     let active;
     export let location;
-    export let onDelete;
     export let isAdmin;
     let buttonDisabled=false;
 
@@ -71,7 +70,7 @@
                     <input name="year" bind:value={location.year} on:input={handleDisabled} disabled="{!isAdmin}">
                 </div>
                 {#if isAdmin}
-                    <button class="modify">Modify</button>
+                    <button class="modify" disabled="{buttonDisabled}">Modify</button>
                 {/if}
             </div>
         </form>

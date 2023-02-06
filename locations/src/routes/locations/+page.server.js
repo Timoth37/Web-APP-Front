@@ -3,6 +3,7 @@ import { redirect } from '@sveltejs/kit';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ cookies, params }) {
+    console.log("ici")
     if(!cookies.get('jwt')) {
         throw redirect(307,'/login')
     }
@@ -70,7 +71,6 @@ export const actions = {
         if (!cookies.get('jwt'))
             throw redirect(307, '/login');
         const id = url.searchParams.get('id');
-        context.page.html.dispatchEvent(new CustomEvent('delete', {_id: id}))
         await api.del(
             `locations/${id}`,
             cookies.get('jwt')

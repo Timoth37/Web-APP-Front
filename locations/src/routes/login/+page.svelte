@@ -2,20 +2,19 @@
     import { enhance } from '$app/forms';
     /** @type {import('./$types').PageData} */
     export let data;
-    let error = data.error;
 </script>
 
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-    <link href="/loginstyle.css" type="text/css" rel="stylesheet"/>
+    <link href="/authstyle.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
     <div class="form">
         <div class="header">
             <h2>Login</h2>
         </div>
-        {#if error}
+        {#if data.error}
             <p class="error">Wrong username or/and password.<br/>Please register if you haven't done yet !</p>
         {/if}
         <form class="login-form" use:enhance method="POST">

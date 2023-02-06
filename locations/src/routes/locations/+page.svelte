@@ -3,28 +3,9 @@
     import Location from "./Location.svelte";
     import CreateForm from "./CreateForm.svelte";
     /** @type {import('./$types').PageData} */
-    export let data;
-    let locations = data.locations;
-    const isAdmin = data.isAdmin;
+    export let data;;
     let addFormIsActive;
     let addButtonText ="+";
-
-    let customElement;
-    const setCustomElement = el => {
-        customElement = el;
-        customElement.addEventListener('delete', event => {
-            locations = locations.filter(location => location._id !== event._id);
-        });
-    };
-
-    function removeLocation(id){
-    }
-
-    function addLocation(location){
-        locations.unshift(location);
-        locations=locations;
-        onAddFormActive();
-    }
 
     function onAddFormActive() {
         addFormIsActive = !addFormIsActive;
@@ -42,17 +23,17 @@
             <button type="submit">Logout</button>
         </form>
     </div>
-    {#if isAdmin}
+    {#if data.isAdmin}
         <div class="addLocation">
             <button on:click={onAddFormActive}>{addButtonText}</button>
             {#if addFormIsActive}
-                <CreateForm onAdd="{addLocation}"></CreateForm>
+                <CreateForm></CreateForm>
             {/if}
         </div>
     {/if}
     <div class="location-list">
-        {#each locations as location (location._id)}
-            <Location location="{location}" isAdmin="{isAdmin}" data="{data}" onDelete={removeLocation}></Location>
+        {#each data.locations as location (location._id)}
+            <Location location="{location}" isAdmin="{data.isAdmin}" data="{data}"></Location>
         {/each}
     </div>
 </body>
@@ -82,10 +63,6 @@
     .menu button:hover{
         background: #222222;
         cursor: pointer;
-    }
-
-    nav a:hover{
-        color: #999999;
     }
 
     .addLocation{
