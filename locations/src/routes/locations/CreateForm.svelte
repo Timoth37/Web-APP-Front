@@ -2,7 +2,6 @@
     import MdLocationOn from 'svelte-icons/md/MdLocationOn.svelte'
     import {enhance} from "$app/forms";
     let buttonDisabled =true;
-
     let location = {
         filmName : "",
         filmType: "",
@@ -74,7 +73,6 @@
                         <p class="title">Latitude : </p>
                         <input name="latitude"
                                placeholder="ex: 1.356895"
-                               type="number"
                                bind:value={location.geolocation.coordinates[0]}
                                on:input={handleDisabled}>
                     </div>
@@ -82,7 +80,6 @@
                         <p class="title">Longitude : </p>
                         <input name="longitude"
                                placeholder="ex: -3.569856"
-                               type="number"
                                bind:value={location.geolocation.coordinates[1]}
                                on:input={handleDisabled}>
                     </div>

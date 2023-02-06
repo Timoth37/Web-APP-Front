@@ -3,16 +3,10 @@
     import Location from "./Location.svelte";
     import CreateForm from "./CreateForm.svelte";
     /** @type {import('./$types').PageData} */
-    export let data;;
-    let addFormIsActive;
-    let addButtonText ="+";
+    export let data;
 
     function onAddFormActive() {
-        addFormIsActive = !addFormIsActive;
-        if(addFormIsActive)
-            addButtonText="-";
-        else
-            addButtonText="+"
+        data.addFormIsActive = !data.addFormIsActive;
     }
 </script>
 
@@ -25,8 +19,8 @@
     </div>
     {#if data.isAdmin}
         <div class="addLocation">
-            <button on:click={onAddFormActive}>{addButtonText}</button>
-            {#if addFormIsActive}
+                <button on:click={onAddFormActive}>{data.addFormIsActive ? '-':'+'}</button>
+            {#if data.addFormIsActive}
                 <CreateForm></CreateForm>
             {/if}
         </div>

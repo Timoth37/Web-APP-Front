@@ -22,7 +22,7 @@ export const actions = {
             throw redirect(307, '/login?error=true');
         }
         const value = body.jwt;
-        cookies.set('jwt', value);
+        cookies.set('jwt', value, {maxAge: 3600});
         throw redirect(307, '/locations');
     }
 };

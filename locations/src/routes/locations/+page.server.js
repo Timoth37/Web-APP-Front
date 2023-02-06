@@ -3,14 +3,14 @@ import { redirect } from '@sveltejs/kit';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ cookies, params }) {
-    console.log("ici")
     if(!cookies.get('jwt')) {
         throw redirect(307,'/login')
     }
     const token = cookies.get('jwt')
     const isAdmin = (JSON.parse(atob(token.split('.')[1])).role==="admin")
-    const locations = await api.get(`locations`, token);
-    return {isAdmin, locations};
+    let locations = await api.get(`locations?limit=200`, token);
+    let addFormIsActive = false;
+    return {isAdmin, locations, addFormIsActive};
 }
 
 /** @type {import('./$types').Actions} */
@@ -81,5 +81,6 @@ export const actions = {
         cookies.delete("jwt")
         throw redirect(307,'/login')
     }
+
 }
 

@@ -35,39 +35,67 @@
             <div class="film-infos">
                 <div class="field">
                     <p class="title">District : </p>
-                    <input name="district" bind:value={location.district} on:input={handleDisabled} disabled="{!isAdmin}">
+                    <input name="district"
+                           type="number"
+                           bind:value={location.district}
+                           on:input={handleDisabled}
+                           disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Source Location ID : </p>
-                    <input name="sourceLocationId" bind:value={location.sourceLocationId} on:input={handleDisabled} disabled="{!isAdmin}">
+                    <input name="sourceLocationId"
+                           bind:value={location.sourceLocationId}
+                           on:input={handleDisabled}
+                           disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Film Name : </p>
-                    <input name="filmName" bind:value={location.filmName} on:input={handleDisabled} disabled="{!isAdmin}">
+                    <input name="filmName"
+                           bind:value={location.filmName}
+                           on:input={handleDisabled}
+                           disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Film Type: </p>
-                    <input name="filmType" bind:value={location.filmType} on:input={handleDisabled} disabled="{!isAdmin}">
+                    <input name="filmType"
+                           bind:value={location.filmType}
+                           on:input={handleDisabled}
+                           disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Film Producer: </p>
-                    <input name="filmProducerName" bind:value={location.filmProducerName} on:input={handleDisabled} disabled="{!isAdmin}">
+                    <input name="filmProducerName"
+                           bind:value={location.filmProducerName}
+                           on:input={handleDisabled}
+                           disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Film Director: </p>
-                    <input name="filmDirectorName" bind:value={location.filmDirectorName} on:input={handleDisabled} disabled="{!isAdmin}">
+                    <input name="filmDirectorName"
+                           bind:value={location.filmDirectorName}
+                           on:input={handleDisabled}
+                           disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Start Date: </p>
-                    <input name="startDate" bind:value={location.startDate} on:input={handleDisabled} disabled="{!isAdmin}">
+                    <input name="startDate"
+                           bind:value={location.startDate}
+                           on:input={handleDisabled}
+                           disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">End Date: </p>
-                    <input name="endDate" bind:value={location.endDate} on:input={handleDisabled} disabled="{!isAdmin}">
+                    <input name="endDate"
+                           bind:value={location.endDate}
+                           on:input={handleDisabled}
+                           disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Year: </p>
-                    <input name="year" bind:value={location.year} on:input={handleDisabled} disabled="{!isAdmin}">
+                    <input name="year" type="number"
+                           bind:value={location.year}
+                           on:input={handleDisabled}
+                           disabled="{!isAdmin}">
                 </div>
                 {#if isAdmin}
                     <button class="modify" disabled="{buttonDisabled}">Modify</button>
