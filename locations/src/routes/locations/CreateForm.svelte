@@ -20,19 +20,7 @@
     }
 
     function handleDisabled(){
-        buttonDisabled = !(
-            location.filmName
-        && location.filmType
-        && location.filmDirectorName
-        && location.filmProducerName
-        && location.year
-        && location.startDate
-        && location.endDate
-        && location.address
-        && location.geolocation.coordinates[0]
-        && location.geolocation.coordinates[1]
-        && location.district
-        && location.sourceLocationId)
+        buttonDisabled = !(location.filmName && location.address)
     }
 
 </script>
@@ -51,7 +39,7 @@
         <div class="film-infos">
             <div class="name-infos">
                 <div class="field">
-                    <p class="title">Film Name: </p>
+                    <p class="title">Film Name* : </p>
                     <input name="filmName"
                            placeholder="ex: Le roi Lion"
                            class="value"
@@ -66,36 +54,31 @@
                         <input  name="district"
                                 placeholder="ex: 75019"
                                 type="number"
-                                bind:value={location.district}
-                                on:input={handleDisabled}>
+                                bind:value={location.district}>
                     </div>
                     <div class="field">
                         <p class="title">Latitude : </p>
                         <input name="latitude"
                                placeholder="ex: 1.356895"
-                               bind:value={location.geolocation.coordinates[0]}
-                               on:input={handleDisabled}>
+                               bind:value={location.geolocation.coordinates[0]}>
                     </div>
                     <div class="field">
                         <p class="title">Longitude : </p>
                         <input name="longitude"
                                placeholder="ex: -3.569856"
-                               bind:value={location.geolocation.coordinates[1]}
-                               on:input={handleDisabled}>
+                               bind:value={location.geolocation.coordinates[1]}>
                     </div>
                     <div class="field">
                         <p class="title">Source Location ID : </p>
                         <input name="sourceLocationId"
                                placeholder="ex: 2020-434"
-                               bind:value={location.sourceLocationId}
-                               on:input={handleDisabled}>
+                               bind:value={location.sourceLocationId}>
                     </div>
                     <div class="field">
-                        <p class="title">Film Type: </p>
+                        <p class="title">Film Type : </p>
                         <input name="filmType"
                                placeholder="ex: Téléfilm"
-                               bind:value={location.filmType}
-                               on:input={handleDisabled}>
+                               bind:value={location.filmType}>
                     </div>
                 </div>
                 <div class="right-infos">
@@ -103,37 +86,32 @@
                         <p class="title">Film Producer: </p>
                         <input name="filmProducerName"
                                placeholder="ex: Jean Dupond"
-                               bind:value={location.filmProducerName}
-                               on:input={handleDisabled}>
+                               bind:value={location.filmProducerName}>
                     </div>
                     <div class="field">
                         <p class="title">Film Director: </p>
                         <input name="filmDirectorName"
                                placeholder="ex: Jérôme Blat"
-                               bind:value={location.filmDirectorName}
-                               on:input={handleDisabled}>
+                               bind:value={location.filmDirectorName}>
                     </div>
                     <div class="field">
                         <p class="title">Start Date: </p>
                         <input name="startDate"
                                type="date"
-                               bind:value={location.startDate}
-                               on:input={handleDisabled}>
+                               bind:value={location.startDate}>
                     </div>
                     <div class="field">
                         <p class="title">End Date: </p>
                         <input name="endDate"
                                type="date"
-                               bind:value={location.endDate}
-                               on:input={handleDisabled}>
+                               bind:value={location.endDate}>
                     </div>
                     <div class="field">
                         <p class="title">Year: </p>
                         <input name="year"
                                placeholder="ex: 2023"
                                type="number"
-                               bind:value={location.year}
-                               on:input={handleDisabled}>
+                               bind:value={location.year}>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,6 @@
     import CreateForm from "./CreateForm.svelte";
     /** @type {import('./$types').PageData} */
     export let data;
-
     function onAddFormActive() {
         data.addFormIsActive = !data.addFormIsActive;
     }

@@ -10,91 +10,83 @@
     }
 
     function handleDisabled(){
-        buttonDisabled = !(
-            location.filmName
-            && location.filmType
-            && location.filmDirectorName
-            && location.filmProducerName
-            && location.year
-            && location.startDate
-            && location.endDate
-            && location.address
-            && location.geolocation.coordinates[0]
-            && location.geolocation.coordinates[1]
-            && location.district
-            && location.sourceLocationId)
+        buttonDisabled = !(location.filmName && location.address)
     }
 </script>
 
 <body>
-    <a on:click={onDeploy}>
+    <div class="deploy" on:click={onDeploy}>
         <h3>{location.address}</h3>
-    </a>
+    </div>
     {#if active}
         <form use:enhance method="POST" action="?/updateLocation&id={location._id}">
             <div class="film-infos">
                 <div class="field">
-                    <p class="title">District : </p>
-                    <input name="district"
-                           type="number"
-                           bind:value={location.district}
-                           on:input={handleDisabled}
-                           disabled="{!isAdmin}">
-                </div>
-                <div class="field">
-                    <p class="title">Source Location ID : </p>
-                    <input name="sourceLocationId"
-                           bind:value={location.sourceLocationId}
-                           on:input={handleDisabled}
-                           disabled="{!isAdmin}">
-                </div>
-                <div class="field">
-                    <p class="title">Film Name : </p>
+                    <p class="title">Film Name* : </p>
                     <input name="filmName"
                            bind:value={location.filmName}
                            on:input={handleDisabled}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
-                    <p class="title">Film Type: </p>
+                    <p class="title">Film Type : </p>
                     <input name="filmType"
                            bind:value={location.filmType}
-                           on:input={handleDisabled}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
-                    <p class="title">Film Producer: </p>
+                    <p class="title">Film Producer : </p>
                     <input name="filmProducerName"
                            bind:value={location.filmProducerName}
-                           on:input={handleDisabled}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
-                    <p class="title">Film Director: </p>
+                    <p class="title">Film Director : </p>
                     <input name="filmDirectorName"
                            bind:value={location.filmDirectorName}
-                           on:input={handleDisabled}
+                           disabled="{!isAdmin}">
+                </div>
+                <div class="field">
+                    <p class="title">District : </p>
+                    <input name="district"
+                           type="number"
+                           bind:value={location.district}
+                           disabled="{!isAdmin}">
+                </div>
+                <div class="field">
+                    <p class="title">Source Location ID : </p>
+                    <input name="sourceLocationId"
+                           bind:value={location.sourceLocationId}
+                           disabled="{!isAdmin}">
+                </div>
+                <div class="field">
+                    <p class="title">Latitude : </p>
+                    <input name="latitude"
+                           bind:value={location.geolocation.coordinates[0]}
+                           disabled="{!isAdmin}">
+                </div>
+                <div class="field">
+                    <p class="title">Longitude : </p>
+                    <input name="longitude"
+                           bind:value={location.geolocation.coordinates[1]}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Start Date: </p>
                     <input name="startDate"
                            bind:value={location.startDate}
-                           on:input={handleDisabled}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">End Date: </p>
                     <input name="endDate"
                            bind:value={location.endDate}
-                           on:input={handleDisabled}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Year: </p>
                     <input name="year" type="number"
                            bind:value={location.year}
-                           on:input={handleDisabled}
                            disabled="{!isAdmin}">
                 </div>
                 {#if isAdmin}
@@ -112,20 +104,10 @@
 
 
 <style>
-    a{
-        text-decoration: none;
+    .deploy{
+        width: 100%;
         color: #444444;
         font-size: 14px;
-    }
-
-
-    body{
-        background: #EAEBEC;
-        text-align: center;
-        width: 60%;
-        margin: 10px auto;
-        cursor: pointer;
-        border-radius: 5px;
     }
 
     h3{
@@ -138,6 +120,16 @@
 
     h3:hover{
         background: #999999;
+    }
+
+
+    body{
+        background: #EAEBEC;
+        text-align: center;
+        width: 60%;
+        margin: 10px auto;
+        cursor: pointer;
+        border-radius: 5px;
     }
 
     .field{

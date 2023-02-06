@@ -6,7 +6,7 @@ export async function load({ cookies, url }) {
     if(cookies.get('jwt')) {
         throw redirect(307,'/locations')
     }
-    const error = url.searchParams.get('error') === 'true';
+    const error = url.searchParams.get('error');
     return {error}
 }
 
@@ -19,7 +19,7 @@ export const actions = {
                 password: data.get('password')
         });
         if (body.status===401) {
-            throw redirect(307, '/login?error=true');
+            throw redirect(307, '/login?error=wrongID');
         }
         const value = body.jwt;
         cookies.set('jwt', value, {maxAge: 3600});

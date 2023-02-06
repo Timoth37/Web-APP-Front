@@ -4,7 +4,7 @@ import { redirect } from '@sveltejs/kit';
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ cookies, params }) {
     if(!cookies.get('jwt')) {
-        throw redirect(307,'/login')
+        throw redirect(307,'/login?error=mustLogin')
     }
     const token = cookies.get('jwt')
     const isAdmin = (JSON.parse(atob(token.split('.')[1])).role==="admin")

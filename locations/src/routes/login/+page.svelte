@@ -10,11 +10,16 @@
     <link href="/authstyle.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
+    {#if data.error==='mustLogin'}
+        <div class="mustLogin">
+            <p>To access locations, please login !</p>
+        </div>
+    {/if}
     <div class="form">
         <div class="header">
             <h2>Login</h2>
         </div>
-        {#if data.error}
+        {#if data.error==='wrongID'}
             <p class="error">Wrong username or/and password.<br/>Please register if you haven't done yet !</p>
         {/if}
         <form class="login-form" use:enhance method="POST">
