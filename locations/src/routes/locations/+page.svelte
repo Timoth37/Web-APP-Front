@@ -1,66 +1,58 @@
 <script>
-    import Location from "../../components/Location/Location.svelte";
-    import CreateForm from "../../components/CreateForm/CreateForm.svelte";
-    import { onMount } from "svelte";
-    let locations = [];
-    let addFormActive;
+    import {enhance} from "$app/forms";
+    import Location from "./Location.svelte";
+    import CreateForm from "./CreateForm.svelte";
+    /** @type {import('./$types').PageData} */
+    export let data;
+    let locations = data.locations;
+    const isAdmin = data.isAdmin;
+    let addFormIsActive;
     let addButtonText ="+";
-    let userRole="admin";
 
-    onMount(async () => {
-        const token = sessionStorage.getItem("token")
-        if(!token){
-            window.location.href = '/login';
-        }else{
-            const response = await fetch("http://localhost:3000/locations",{
-                headers: {'Authorization': `Bearer ${token}`}
-            });
-            locations =await response.json();
-            locations = locations.reverse()
-        }
-    });
+    let customElement;
+    const setCustomElement = el => {
+        customElement = el;
+        customElement.addEventListener('delete', event => {
+            locations = locations.filter(location => location._id !== event._id);
+        });
+    };
 
     function removeLocation(id){
-        locations = locations.filter(location => location._id !== id);
     }
 
     function addLocation(location){
         locations.unshift(location);
         locations=locations;
-        console.log(locations[0])
         onAddFormActive();
     }
 
     function onAddFormActive() {
-        addFormActive = !addFormActive;
-        if(addFormActive)
+        addFormIsActive = !addFormIsActive;
+        if(addFormIsActive)
             addButtonText="-";
         else
             addButtonText="+"
-    }
-
-    async function logout(){
-        sessionStorage.setItem("token", "")
-        window.location.href = '/login';
     }
 </script>
 
 
 <body>
-    <nav class="menu">
-        <a href="/login" on:click={logout}>Logout</a>
-    </nav>
-    {#if userRole==='admin'}
+    <div class="menu">
+        <form use:enhance method="POST" action="?/logout">
+            <button type="submit">Logout</button>
+        </form>
+    </div>
+    {#if isAdmin}
         <div class="addLocation">
             <button on:click={onAddFormActive}>{addButtonText}</button>
-            {#if addFormActive}
+            {#if addFormIsActive}
                 <CreateForm onAdd="{addLocation}"></CreateForm>
             {/if}
         </div>
     {/if}
     <div class="location-list">
         {#each locations as location (location._id)}
-            <Location location="{location}" onDelete={removeLocation}></Location>
+            <Location location="{location}" isAdmin="{isAdmin}" data="{data}" onDelete={removeLocation}></Location>
         {/each}
     </div>
 </body>
@@ -72,22 +64,24 @@
         align-content: center;
     }
 
-
-    nav{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        font-size: 20px;
-        background: black;
+    .menu{
         width: 30%;
         margin: 0 auto;
-        border-radius: 10px;
     }
 
-    nav a{
-        text-decoration: none;
-        margin: 10px;
+    .menu button{
+        border: none;
+        border-radius: 10px;
+        background: black;
+        width: 100%;
+        font-size: 20px;
+        padding: 10px 10px;
         color: #FFFFFF;
+        cursor: pointer;
+    }
+    .menu button:hover{
+        background: #222222;
+        cursor: pointer;
     }
 
     nav a:hover{

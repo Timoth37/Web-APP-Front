@@ -4,7 +4,7 @@
 <body>
     <h1 class="up">Front End Exercise with SvelteKit</h1>
     <nav class="menu">
-        <a href="/locations">Play with locations</a>
+        <a href="/locations">Manage locations</a>
     </nav>
     <h1 class="down">Web Application Course at ESILV</h1>
 </body>

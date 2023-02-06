@@ -60,3 +60,9 @@ body{
 .form .message a:hover {
     color: #111111;
 }
+
+.error{
+    color: darkred;
+    font-size: 12px;
+    font-family: "Roboto", sans-serif;
+}
