@@ -5,6 +5,8 @@ run from this directory.
 The basic layout is in place, you can find a login and a registering page.
 If logged in, the location page will be accessible. 
 
+## Backend used
+I used your backend but I managed to desactivate the CORS policy. Also, I decided in the backend to see the last locations added, and not the first ones, by changing the following line of code "return Location.find().limit(limit).skip(offset)" into the following one : "return Location.find().limit(limit).skip(offset).sort({_id:-1})" in location.service.js. 
 
 ## User stories implemented
 
