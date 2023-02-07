@@ -23,10 +23,10 @@ The user can see a list of locations, he can display all informations related to
 The admin can see a button add location at the top of the page. He can click on it to display a form. The most important fields are required, adress and the title of the film.
 
 ### US5
-As the admin, by clicking on a location, you can directly edit the informations, then click on the modify button to update the location. you can't change the address as it is the main field of the location. The title of the film is still required. 
+As the admin, by clicking on a location, you can directly edit the informations, then click on the modify button to update the location. You can't change the address as it is the main field of the location. The title of the film is still required. 
 
 ### US6 
-As the admin user, by clicking on a location, a delete button will be display so you can remove a location from the database. 
+As the admin user, by clicking on a location, a delete button will be displayed so you can remove a location from the database. 
 
 
 
