@@ -1,9 +1,9 @@
 # Web-APP-Front
 
-This project should be run from the locations directory. the "npm run dev" should be 
-run from this directory. 
+This project should be run from the locations directory. 
 The basic layout is in place, you can find a login and a registering page.
 If logged in, the location page will be accessible. 
+Some comments are here to explain the main purpose of each function. 
 
 ## Backend used
 I used your backend but I managed to desactivate the CORS policy. Also, I decided in the backend to see the last locations added, and not the first ones, by changing the following line of code "return Location.find().limit(limit).skip(offset)" into the following one : "return Location.find().limit(limit).skip(offset).sort({_id:-1})" in location.service.js. 
