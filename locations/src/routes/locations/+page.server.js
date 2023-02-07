@@ -1,20 +1,30 @@
 import * as api from '$lib/api.js';
 import { redirect } from '@sveltejs/kit';
 
+
+//Load the locations if cookies exist and is correct
+//Throw to login page if the cookies is not existing
+//Throw to login page and delete the cookie if the cookie is not correct
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ cookies, params }) {
-    if(!cookies.get('jwt')) {
-        throw redirect(307,'/login?error=mustLogin')
-    }
+export async function load({ cookies}) {
     const token = cookies.get('jwt')
+    if(!token) {
+        throw redirect(307,'/login?message=mustLogin')
+    }
+    let locations = await api.get(`locations?limit=200`, token)
+    if(locations.status===401){
+        cookies.delete('jwt')
+        throw redirect(307,'/login?message=mustLogin')
+    }
     const isAdmin = (JSON.parse(atob(token.split('.')[1])).role==="admin")
-    let locations = await api.get(`locations?limit=200`, token);
     let addFormIsActive = false;
     return {isAdmin, locations, addFormIsActive};
+
 }
 
 /** @type {import('./$types').Actions} */
 export const actions = {
+    //Create location after the verification of the existence of the cookie
     createLocation: async ({cookies, request}) => {
         if (!cookies.get('jwt'))
             throw redirect(307, '/login');
@@ -43,6 +53,8 @@ export const actions = {
         return {location}
     },
 
+    //Update location after checking the existence of the cookie.
+    //Get the ID of the location through the url of the action
     updateLocation: async ({cookies, request, url}) => {
         if (!cookies.get('jwt'))
             throw redirect(307, '/login');
@@ -54,6 +66,10 @@ export const actions = {
             endDate: data.get('endDate'),
             filmName: data.get('filmName'),
             district: data.get('district'),
+            geolocation: {
+                coordinates: [data.get('latitude'), data.get('longitude')],
+                type: "Point"
+            },
             sourceLocationId: data.get('sourceLocationId'),
             filmDirectorName: data.get('filmDirectorName'),
             startDate: data.get('startDate'),
@@ -67,7 +83,9 @@ export const actions = {
         return {updatedLocation}
     },
 
-    deleteLocation: async ({cookies,url, context}) => {
+    //Delete location after checking the existence of the cookie.
+    //Get the ID of the location through the url of the action
+    deleteLocation: async ({cookies,url}) => {
         if (!cookies.get('jwt'))
             throw redirect(307, '/login');
         const id = url.searchParams.get('id');
@@ -77,6 +95,7 @@ export const actions = {
         );
     },
 
+    //Erase cookie and redirect to login page
     logout: async ({cookies}) => {
         cookies.delete("jwt")
         throw redirect(307,'/login')

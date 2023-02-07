@@ -10,7 +10,7 @@
     <link href="/authstyle.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-    {#if data.error==='mustLogin'}
+    {#if data.message==='mustLogin'}
         <div class="mustLogin">
             <p>To access locations, please login !</p>
         </div>
@@ -19,7 +19,7 @@
         <div class="header">
             <h2>Login</h2>
         </div>
-        {#if data.error==='wrongID'}
+        {#if data.message==='wrongID'}
             <p class="error">Wrong username or/and password.<br/>Please register if you haven't done yet !</p>
         {/if}
         <form class="login-form" use:enhance method="POST">

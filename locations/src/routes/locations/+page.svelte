@@ -4,6 +4,8 @@
     import CreateForm from "./CreateForm.svelte";
     /** @type {import('./$types').PageData} */
     export let data;
+
+    //Make the add Form displayed in the window if the add button is clicked
     function onAddFormActive() {
         data.addFormIsActive = !data.addFormIsActive;
     }
