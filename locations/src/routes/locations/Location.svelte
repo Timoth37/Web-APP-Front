@@ -33,52 +33,62 @@
                 <div class="field">
                     <p class="title">Film Type : </p>
                     <input name="filmType"
+                           bind:value={location.filmType}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Film Producer : </p>
                     <input name="filmProducerName"
+                           bind:value={location.filmProducerName}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Film Director : </p>
                     <input name="filmDirectorName"
+                           bind:value={location.filmProducerName}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">District : </p>
                     <input name="district"
                            type="number"
+                           bind:value={location.district}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Source Location ID : </p>
                     <input name="sourceLocationId"
+                           bind:value={location.sourceLocationId}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Latitude : </p>
                     <input name="latitude"
+                           bind:value={location.geolocation.coordinates[0]}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Longitude : </p>
                     <input name="longitude"
+                           bind:value={location.geolocation.coordinates[1]}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Start Date: </p>
                     <input name="startDate"
+                           bind:value={location.startDate}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">End Date: </p>
                     <input name="endDate"
+                           bind:value={location.endDate}
                            disabled="{!isAdmin}">
                 </div>
                 <div class="field">
                     <p class="title">Year: </p>
                     <input name="year" type="number"
+                           bind:value={location.year}
                            disabled="{!isAdmin}">
                 </div>
                 {#if isAdmin}
