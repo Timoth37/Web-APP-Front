@@ -1,4 +1,4 @@
-const base = 'http://localhost:3000';
+const base = 'https://web-app-back-render.onrender.com';
 
 //Fetches the data from the API with the right parameters, return the data received from the API
 async function send({ method, path, data, token }) {

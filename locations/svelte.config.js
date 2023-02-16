@@ -1,10 +1,9 @@
-import adapter from '@sveltejs/adapter-auto';
-
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
+import adapter from '@sveltejs/adapter-netlify';
+export default {
 	kit: {
-		adapter: adapter()
+		adapter: adapter({
+			edge: false,
+			split: true
+		})
 	}
 };
-
-export default config;
